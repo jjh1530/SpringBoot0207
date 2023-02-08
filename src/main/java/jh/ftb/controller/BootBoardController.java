@@ -14,6 +14,7 @@ import jh.ftb.entity.BootBoard;
 import jh.ftb.service.BootBoardService;
 
 @Controller
+@RequestMapping("/board/*")
 public class BootBoardController {
 
 	@Autowired
@@ -23,7 +24,7 @@ public class BootBoardController {
 	public String list(Model model) {
 		List<BootBoard> list = bootBoardService.getLists();
 		model.addAttribute("list", list);
-		return "list";  
+		return "board/list";  
 	}
 	
 	@GetMapping("/register")
@@ -35,7 +36,7 @@ public class BootBoardController {
 	@PostMapping("/register")
 	public String register(BootBoard vo) {
 		bootBoardService.register(vo);
-		return "redirect:/list";
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("/get")
@@ -48,12 +49,12 @@ public class BootBoardController {
 	@GetMapping("/remove")
 	public String remove(Long idx) {
 		bootBoardService.delete(idx);
-		return "redirect:/list";
+		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/modify")
 	public String modify(BootBoard vo) {
 		bootBoardService.modify(vo);
-		return "redirect:/list";
+		return "redirect:/board/list";
 	}
 }
